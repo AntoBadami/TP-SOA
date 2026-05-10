@@ -8,7 +8,7 @@ import DashboardSemana from './components/DashboardSemana.vue'
     <header class="app-header">
       <div class="header-content">
         <div class="header-icon" aria-hidden="true">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2b6cb0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--icon-stroke)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
             <circle cx="12" cy="9" r="2.5"/>
           </svg>
@@ -52,13 +52,13 @@ import DashboardSemana from './components/DashboardSemana.vue'
 .app-header h1 {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #1a202c;
+  color: var(--text-primary);
   letter-spacing: -0.02em;
 }
 
 .header-sub {
   font-size: 0.875rem;
-  color: #4a5568;
+  color: var(--text-secondary);
   margin-top: -0.1rem;
 }
 

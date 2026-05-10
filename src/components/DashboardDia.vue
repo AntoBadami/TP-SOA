@@ -57,16 +57,16 @@ onMounted(() => {
 
 <style scoped>
 .dashboard-card {
-  background: #fff;
+  background: var(--bg-card);
   border-radius: 12px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+  box-shadow: var(--shadow-card);
   display: flex;
   flex-direction: column;
   overflow: hidden;
   transition: box-shadow 0.2s;
 }
 .dashboard-card:hover {
-  box-shadow: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.06);
+  box-shadow: var(--shadow-card-hover);
 }
 
 .card-header {
@@ -74,7 +74,7 @@ onMounted(() => {
   align-items: center;
   justify-content: space-between;
   padding: 0.75rem 1rem;
-  border-bottom: 1px solid #edf2f7;
+  border-bottom: 1px solid var(--border-card);
 }
 
 .card-header h2 {
@@ -82,7 +82,7 @@ onMounted(() => {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #4a5568;
+  color: var(--text-secondary);
 }
 
 .reload-btn {
@@ -90,21 +90,21 @@ onMounted(() => {
   border: none;
   font-size: 1.1rem;
   cursor: pointer;
-  color: #a0aec0;
+  color: var(--text-muted);
   padding: 0.25rem 0.5rem;
   border-radius: 6px;
   line-height: 1;
   transition: color 0.15s, background 0.15s;
 }
 .reload-btn:hover {
-  color: #2d3748;
-  background: #f7fafc;
+  color: var(--hover-text);
+  background: var(--hover-bg);
 }
 
 .frame-container {
   flex: 1;
   position: relative;
-  background: #f7fafc;
+  background: var(--bg-frame);
 }
 
 .dashboard-frame {
@@ -122,17 +122,17 @@ onMounted(() => {
   align-items: center;
   justify-content: center;
   gap: 0.75rem;
-  color: #a0aec0;
+  color: var(--text-muted);
   font-size: 0.875rem;
-  background: #f7fafc;
+  background: var(--bg-frame);
   z-index: 1;
 }
 
 .spinner {
   width: 24px;
   height: 24px;
-  border: 3px solid #e2e8f0;
-  border-top-color: #4a5568;
+  border: 3px solid var(--spinner-border);
+  border-top-color: var(--spinner-top);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
@@ -149,21 +149,21 @@ onMounted(() => {
   justify-content: center;
   gap: 0.75rem;
   padding: 2rem;
-  color: #a0aec0;
+  color: var(--text-muted);
 }
 
 .dashboard-error button {
   padding: 0.5rem 1.25rem;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--btn-border);
   border-radius: 8px;
-  background: #fff;
+  background: var(--btn-bg);
   cursor: pointer;
   font-size: 0.875rem;
-  color: #4a5568;
+  color: var(--text-secondary);
   transition: border-color 0.15s, background 0.15s;
 }
 .dashboard-error button:hover {
-  border-color: #cbd5e0;
-  background: #f7fafc;
+  border-color: var(--error-border);
+  background: var(--hover-bg);
 }
 </style>

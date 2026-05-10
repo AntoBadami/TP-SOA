@@ -1,3 +1,45 @@
+:root {
+  --bg-page: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
+  --bg-card: #ffffff;
+  --text-primary: #1a202c;
+  --text-secondary: #4a5568;
+  --text-muted: #a0aec0;
+  --border-card: #edf2f7;
+  --bg-frame: #f7fafc;
+  --spinner-border: #e2e8f0;
+  --spinner-top: #4a5568;
+  --hover-bg: #f7fafc;
+  --hover-text: #2d3748;
+  --error-border: #e2e8f0;
+  --btn-border: #e2e8f0;
+  --btn-bg: #ffffff;
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+  --shadow-card-hover: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.06);
+  --icon-stroke: #2b6cb0;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-page: #0f1419;
+    --bg-card: #1a2332;
+    --text-primary: #e2e8f0;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --border-card: #2d3a4f;
+    --bg-frame: #151e2c;
+    --spinner-border: #2d3a4f;
+    --spinner-top: #94a3b8;
+    --hover-bg: #1e293b;
+    --hover-text: #e2e8f0;
+    --error-border: #2d3a4f;
+    --btn-border: #2d3a4f;
+    --btn-bg: #1a2332;
+    --shadow-card: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
+    --shadow-card-hover: 0 4px 6px rgba(0,0,0,0.4), 0 2px 4px rgba(0,0,0,0.3);
+    --icon-stroke: #60a5fa;
+  }
+}
+
 *,
 *::before,
 *::after {
@@ -8,8 +50,8 @@
 
 body {
   font-family: system-ui, -apple-system, sans-serif;
-  background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
-  color: #1a202c;
+  background: var(--bg-page);
+  color: var(--text-primary);
   line-height: 1.5;
   min-height: 100vh;
 }
