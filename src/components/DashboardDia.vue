@@ -1,15 +1,10 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { getDashboardDiaUrl } from '../utils/dates.js'
 
 const url = ref(getDashboardDiaUrl())
 const loading = ref(true)
 const error = ref(false)
-
-const iframeClass = computed(() => ({
-  'dashboard-frame': true,
-  hidden: loading.value,
-}))
 
 function onLoad() {
   loading.value = false
@@ -25,100 +20,150 @@ function recargar() {
   loading.value = true
   error.value = false
 }
+
+onMounted(() => {
+  setTimeout(() => {
+    if (loading.value) {
+      loading.value = false
+    }
+  }, 10000)
+})
 </script>
 
 <template>
-  <section class="dashboard" aria-label="Dashboard diario">
-    <h2>Día</h2>
+  <section class="dashboard-card" aria-label="Dashboard diario">
+    <div class="card-header">
+      <h2>Día</h2>
+      <button class="reload-btn" @click="recargar" title="Recargar dashboard">↻</button>
+    </div>
     <div v-if="error" class="dashboard-error">
       <p>Dashboard no disponible</p>
       <button @click="recargar">Reintentar</button>
     </div>
     <div v-else class="frame-container">
-      <div v-if="loading" class="dashboard-loading" aria-live="polite">Cargando…</div>
+      <div v-if="loading" class="dashboard-loading"><span class="spinner"></span> Cargando…</div>
       <iframe
-        :class="iframeClass"
+        class="dashboard-frame"
         :src="url"
         title="Dashboard diario de calidad de aire"
+        loading="lazy"
         @load="onLoad"
         @error="onError"
         allow="fullscreen"
       />
     </div>
-    <button class="reload-btn" @click="recargar" title="Recargar dashboard">↻</button>
   </section>
 </template>
 
 <style scoped>
-.dashboard {
+.dashboard-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
   display: flex;
   flex-direction: column;
-  height: 100%;
-  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.2s;
 }
-h2 {
-  margin: 0 0 0.5rem;
-  font-size: 1.25rem;
+.dashboard-card:hover {
+  box-shadow: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.06);
 }
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #edf2f7;
+}
+
+.card-header h2 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #4a5568;
+}
+
+.reload-btn {
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: #a0aec0;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  line-height: 1;
+  transition: color 0.15s, background 0.15s;
+}
+.reload-btn:hover {
+  color: #2d3748;
+  background: #f7fafc;
+}
+
 .frame-container {
   flex: 1;
   position: relative;
-  border-radius: 8px;
-  overflow: hidden;
+  background: #f7fafc;
 }
+
 .dashboard-frame {
   width: 100%;
   height: 100%;
   border: none;
-  background: #fff;
+  display: block;
 }
-.dashboard-frame.hidden {
-  display: none;
-}
+
 .dashboard-loading {
+  position: absolute;
+  inset: 0;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100%;
-  color: #888;
-  background: #eee;
-  border-radius: 8px;
+  gap: 0.75rem;
+  color: #a0aec0;
+  font-size: 0.875rem;
+  background: #f7fafc;
+  z-index: 1;
 }
+
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid #e2e8f0;
+  border-top-color: #4a5568;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
 .dashboard-error {
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
-  color: #888;
-  background: #f9f9f9;
-  border-radius: 8px;
-  border: 1px solid #ddd;
+  gap: 0.75rem;
+  padding: 2rem;
+  color: #a0aec0;
 }
+
 .dashboard-error button {
-  padding: 0.5rem 1rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  padding: 0.5rem 1.25rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
   background: #fff;
   cursor: pointer;
+  font-size: 0.875rem;
+  color: #4a5568;
+  transition: border-color 0.15s, background 0.15s;
 }
 .dashboard-error button:hover {
-  background: #f0f0f0;
-}
-.reload-btn {
-  position: absolute;
-  top: 0.25rem;
-  right: 0;
-  background: none;
-  border: none;
-  font-size: 1.25rem;
-  cursor: pointer;
-  color: #666;
-  padding: 0.25rem;
-  line-height: 1;
-}
-.reload-btn:hover {
-  color: #222;
+  border-color: #cbd5e0;
+  background: #f7fafc;
 }
 </style>

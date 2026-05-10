@@ -26,6 +26,7 @@ export function getDashboardDiaUrl() {
     'from': `${hoy}T03:00:00.000Z`,
     'to': `${maniana}T03:00:00.000Z`,
     'timezone': 'browser',
+    'kiosk': 'tv',
   })
   return `${base}?${params.toString()}`
 }
